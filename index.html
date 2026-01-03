@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Deepakkumar & Vijayadurga - Wedding Invitation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&family=Allura&family=Dancing+Script:wght@400;700&family=Sacramento&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="theme-purple">
+
+<!-- LOADING ANIMATION -->
+<div id="loader" class="loader">
+  <div class="loader-content">
+    <div class="monogram">D<span>&</span>V</div>
+    <div class="loader-text" style="text-align: center; line-height: 1.5;"><span class="lang-en">Hey there! 💕<br>We're so excited to celebrate with you</span><span class="lang-ta">வணக்கம்! 💕<br>உங்களுடன் கொண்டாட மிகவும் மகிழ்ச்சி</span></div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
+</div>
+
+<!-- CONTROL PANEL -->
+<div class="control-panel">
+  <button class="control-btn" id="langToggle" aria-label="Toggle Language" title="Language">
+    <i class="fas fa-language"></i>
+  </button>
+  <button class="control-btn" id="darkModeToggle" aria-label="Toggle Dark Mode" title="Dark Mode">
+    <i class="fas fa-moon"></i>
+  </button>
+  <button class="control-btn" id="musicToggle" aria-label="Toggle Music" title="Music">
+    <i class="fas fa-music"></i>
+  </button>
+</div>
+
+
+
+<!-- CONFETTI CANVAS -->
+<canvas id="confettiCanvas"></canvas>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="music/bg.mp3" type="audio/mp3">
+</audio>
+
+
+
+<!-- COUNTDOWN TIMER - Always Visible at Top -->
+<div class="countdown-timer">
+  <h2 style="text-align: center; font-size: 32px; color: var(--accent-light); text-shadow: 0 3px 20px rgba(0,0,0,0.6); font-family: 'Playfair Display', serif; margin: 0;">
+    <span class="lang-en">✨ Our Forever Begins ✨</span>
+    <span class="lang-ta">✨ எங்கள் நித்திய வாழ்க்கை தொடங்குகிறது ✨</span>
+  </h2>
+</div>
+
+<!-- MAILBOX -->
+<div class="mailbox-container">
+  <button id="mailbox" class="mailbox closed" aria-label="Open invitation" tabindex="0">
+    <div class="mailbox-icon">
+      <svg class="mailbox-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Heart with Animation -->
+        <defs>
+          <linearGradient id="heartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF1493;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#FF69B4;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FFB6C1;stop-opacity:1" />
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <radialGradient id="shine" cx="50%" cy="30%">
+            <stop offset="0%" style="stop-color:#FFF;stop-opacity:0.6"/>
+            <stop offset="100%" style="stop-color:#FFF;stop-opacity:0"/>
+          </radialGradient>
+        </defs>
+        
+        <!-- Main Heart -->
+        <g class="heart-main">
+          <path d="M 100,170 C 100,170 25,120 25,75 C 25,50 42,35 62,35 C 78,35 90,45 100,65 C 110,45 122,35 138,35 C 158,35 175,50 175,75 C 175,120 100,170 100,170 Z" 
+                fill="url(#heartGradient)" stroke="#C71585" stroke-width="3" filter="url(#glow)"/>
+          <!-- Shine effect -->
+          <ellipse cx="85" cy="65" rx="25" ry="30" fill="url(#shine)" opacity="0.5"/>
+        </g>
+        
+        <!-- Inner Heart (opens) -->
+        <g class="heart-inner" opacity="0">
+          <path d="M 100,150 C 100,150 45,110 45,75 C 45,55 58,45 72,45 C 83,45 92,52 100,68 C 108,52 117,45 128,45 C 142,45 155,55 155,75 C 155,110 100,150 100,150 Z" 
+                fill="#FFE5E5" stroke="#FF69B4" stroke-width="2"/>
+        </g>
+        
+        <!-- Love Text -->
+        <text x="100" y="105" font-size="28" text-anchor="middle" fill="#FFF" class="love-text" opacity="0" 
+              font-family="'Playfair Display', serif" font-weight="bold" stroke="#FF1493" stroke-width="0.5">LOVE</text>
+        
+        <!-- Click Finger Icon -->
+        <g class="click-finger" opacity="1">
+          <text x="100" y="105" font-size="40" text-anchor="middle" fill="#FFF" style="filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));">👆</text>
+        </g>
+        
+        <!-- Sparkles -->
+        <g class="sparkles">
+          <circle class="sparkle sparkle-1" cx="50" cy="55" r="3" fill="#FFD700"/>
+          <circle class="sparkle sparkle-2" cx="150" cy="55" r="3" fill="#FFD700"/>
+          <circle class="sparkle sparkle-3" cx="100" cy="30" r="3" fill="#FFD700"/>
+          <circle class="sparkle sparkle-4" cx="65" cy="90" r="2" fill="#FFF"/>
+          <circle class="sparkle sparkle-5" cx="135" cy="90" r="2" fill="#FFF"/>
+          <circle class="sparkle sparkle-6" cx="85" cy="120" r="2" fill="#FFD700"/>
+          <circle class="sparkle sparkle-7" cx="115" cy="120" r="2" fill="#FFD700"/>
+        </g>
+        
+        <!-- Decorative mini hearts -->
+        <text x="35" y="100" font-size="18" fill="#FF69B4" opacity="0.7" class="deco-heart">♥</text>
+        <text x="162" y="100" font-size="18" fill="#FF69B4" opacity="0.7" class="deco-heart">♥</text>
+      </svg>
+    </div>
+    <span class="label"><span class="lang-en">💕 7 Years of Love, Laughter & Forever After 💕</span><span class="lang-ta">💕 எங்கள் காதல் கதையைத் திறக்க கிளிக் செய்யவும் 💕</span></span>
+    <div class="hashtag"><span class="lang-en">#DeepakLovesDurga</span><span class="lang-ta">#தீபக்லவ்ஸ்துர்கா</span></div>
+  </button>
+</div>
+
+  <!-- PHOTO MEMORIES SLIDESHOW -->
+  <section class="memories-slideshow">
+    <div class="slideshow-header">
+      <h2 class="slideshow-title">
+        <span class="lang-en">✨ Our Journey Together ✨</span>
+        <span class="lang-ta">✨ எங்கள் பயணம் ✨</span>
+      </h2>
+      <p class="slideshow-subtitle">
+        <span class="lang-en">7 Years of Love, Laughter & Forever After</span>
+        <span class="lang-ta">7 வருட காதல், சிரிப்பு மற்றும் நித்திய வாழ்க்கை</span>
+      </p>
+    </div>
+    <div class="slideshow-container">
+      <div class="slide active">
+        <div class="slide-content">
+          <div class="slide-image">
+            <img src="images/pic1.jpg" alt="Childhood">
+            <div class="slide-overlay"></div>
+          </div>
+          <div class="slide-caption">
+            <h3><span class="lang-en">GCT, 2016</span><span class="lang-ta">GCT, 2016</span></h3>
+            <p><span class="lang-en">From attendance roll calls to forever calls 📞💕</span><span class="lang-ta">வருகைப் பதிவிலிருந்து நித்திய அழைப்புகள் வரை 📞💕</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="slide-content">
+          <div class="slide-image">
+            <img src="images/pic3.jpg" alt="Together">
+            <div class="slide-overlay"></div>
+          </div>
+          <div class="slide-caption">
+            <h3><span class="lang-en">Coimbatore ↔️ Chennai</span><span class="lang-ta">கோவை ↔️ சென்னை</span></h3>
+            <p><span class="lang-en">3 years apart, countless calls, one love 🚗💙</span><span class="lang-ta">3 வருடம் தூரம், எண்ணற்ற வீடியோ அழைப்புகள், ஒரே காதல் 🚗💙</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="slide-content">
+          <div class="slide-image">
+            <img src="images/pic5.jpg" alt="Pre-Wedding">
+            <div class="slide-overlay"></div>
+          </div>
+          <div class="slide-caption">
+            <h3><span class="lang-en">2016 - 2026</span><span class="lang-ta">2016 - 2026</span></h3>
+            <p><span class="lang-en">From college friends to life partners ❤️👫</span><span class="lang-ta">கல்லூரி நண்பர்களிலிருந்து வாழ்க்கைத் துணைவர்கள் ❤️👫</span></p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Navigation -->
+      <button class="slide-nav prev" onclick="changeSlide(-1)">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="slide-nav next" onclick="changeSlide(1)">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      
+      <!-- Indicators -->
+      <div class="slide-indicators">
+        <span class="indicator active" onclick="goToSlide(0)"></span>
+        <span class="indicator" onclick="goToSlide(1)"></span>
+        <span class="indicator" onclick="goToSlide(2)"></span>
+      </div>
+    </div>
+    
+    <!-- Countdown Timer after Slideshow -->
+    <div class="slideshow-countdown" style="display: none; margin-top: 40px; flex-direction: column; align-items: center;">
+      <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+        <h3 style="color: var(--accent-light); font-size: 28px; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.5); font-family: 'Playfair Display', serif;">
+          <span class="lang-en">⏳ Counting Down to Our Forever ⏳</span>
+          <span class="lang-ta">⏳ எங்கள் நித்திய வாழ்க்கைக்கு கவுண்ட் டவுன் ⏳</span>
+        </h3>
+      </div>
+      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        <div class="countdown-item">
+          <span class="countdown-number" id="slideDays">00</span>
+          <span class="countdown-label"><span class="lang-en">Days</span><span class="lang-ta">நாட்கள்</span></span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="slideHours">00</span>
+          <span class="countdown-label"><span class="lang-en">Hours</span><span class="lang-ta">மணி</span></span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="slideMinutes">00</span>
+          <span class="countdown-label"><span class="lang-en">Minutes</span><span class="lang-ta">நிமிடம்</span></span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="slideSeconds">00</span>
+          <span class="countdown-label"><span class="lang-en">Seconds</span><span class="lang-ta">விநாடி</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DECORATIVE FLOATING ELEMENTS -->
+  <div class="floating-decorations">
+    <div class="floating-heart" style="left: 10%; animation-delay: 0s;">💕</div>
+    <div class="floating-heart" style="left: 25%; animation-delay: 2s;">💖</div>
+    <div class="floating-heart" style="left: 75%; animation-delay: 4s;">💝</div>
+    <div class="floating-heart" style="left: 90%; animation-delay: 6s;">💗</div>
+    <div class="floating-star" style="left: 15%; animation-delay: 1s;">✨</div>
+    <div class="floating-star" style="left: 40%; animation-delay: 3s;">⭐</div>
+    <div class="floating-star" style="left: 60%; animation-delay: 5s;">🌟</div>
+    <div class="floating-star" style="left: 85%; animation-delay: 7s;">✨</div>
+    <div class="floating-flower" style="left: 20%; animation-delay: 1.5s;">🌸</div>
+    <div class="floating-flower" style="left: 50%; animation-delay: 3.5s;">🌺</div>
+    <div class="floating-flower" style="left: 80%; animation-delay: 5.5s;">🌼</div>
+  </div>
+
+  <!-- SPARKLE PARTICLES -->
+  <div class="sparkle-particles">
+    <div class="particle" style="left: 5%; top: 20%; animation-delay: 0s;"></div>
+    <div class="particle" style="left: 30%; top: 35%; animation-delay: 0.5s;"></div>
+    <div class="particle" style="left: 65%; top: 25%; animation-delay: 1s;"></div>
+    <div class="particle" style="left: 85%; top: 40%; animation-delay: 1.5s;"></div>
+    <div class="particle" style="left: 15%; top: 60%; animation-delay: 2s;"></div>
+    <div class="particle" style="left: 45%; top: 70%; animation-delay: 2.5s;"></div>
+    <div class="particle" style="left: 70%; top: 65%; animation-delay: 3s;"></div>
+    <div class="particle" style="left: 90%; top: 80%; animation-delay: 3.5s;"></div>
+  </div>
+
+  <!-- DECORATIVE RIBBONS -->
+  <div class="decorative-ribbons">
+    <div class="ribbon ribbon-left"></div>
+    <div class="ribbon ribbon-right"></div>
+  </div>
+
+  <!-- ANIMATED BACKGROUND CIRCLES -->
+  <div class="background-circles">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards">
+    <!-- CARD 1: Wedding Details -->
+    <div class="card" data-index="0" role="article" aria-label="Wedding Details Card" tabindex="0">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="card-front-content">
+            <span class="card-emoji">💌</span>
+            <span class="card-front-text">
+              <span class="lang-en">Wedding Details</span>
+              <span class="lang-ta">திருமண விவரங்கள்</span>
+            </span>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="card-ornament">❀</div>
+          <h2 class="couple-names">Deepakkumar & Vijayadurga</h2>
+          <div class="divider"></div>
+          <div class="detail-item">
+            <span class="detail-icon">📅</span>
+            <span class="detail-text">
+              <span class="lang-en">February 08, 2026</span>
+              <span class="lang-ta">பிப்ரவரி 08, 2026</span>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">⏰</span>
+            <span class="detail-text">
+              <span class="lang-en">01:30 PM Onwards</span>
+              <span class="lang-ta">மதியம் 01:30 முதல்</span>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">📍</span>
+            <span class="detail-text">
+              <span class="lang-en">Sri Vasavi Mahal</span>
+              <span class="lang-ta">ஸ்ரீ வாசவி மஹால்</span>
+            </span>
+          </div>
+          <!-- Add to Calendar -->
+          <div class="calendar-btns" style="display: none;">
+            <button class="calendar-btn" id="addGoogleCal" title="Add to Google Calendar">
+              <i class="fab fa-google"></i> <span class="lang-en">Google</span><span class="lang-ta">கூகுள்</span>
+            </button>
+            <button class="calendar-btn" id="addAppleCal" title="Add to Apple Calendar">
+              <i class="fab fa-apple"></i> <span class="lang-en">Apple</span><span class="lang-ta">ஆப்பிள்</span>
+            </button>
+          </div>
+          <!-- Venue Map -->
+          <button class="venue-btn" id="venueMap">
+            <i class="fas fa-map-marker-alt"></i> <span class="lang-en">View Map</span><span class="lang-ta">வரைபடத்தைக் காண்க</span>
+          </button>
+          <div class="card-ornament bottom">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTO GALLERY 1 -->
+    <div class="photo-frame photo-carousel" data-index="0">
+      <div class="photo-wrapper">
+        <div class="carousel-container">
+          <img src="images/photo1.jpg" alt="Our Photo" class="couple-photo carousel-img active">
+          <img src="images/photo1b.jpg" alt="Our Photo" class="couple-photo carousel-img">
+          <img src="images/photo1c.jpg" alt="Our Photo" class="couple-photo carousel-img">
+          <div class="carousel-controls">
+            <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+          </div>
+          <div class="carousel-dots"></div>
+        </div>
+      </div>
+      <div class="photo-caption" style="text-align: center; margin-top: 15px; padding: 10px; color: var(--accent-light); font-style: italic; font-size: 16px;">
+        <span class="lang-en">💑 Seven Years of Us, A Lifetime to Go 💑</span>
+        <span class="lang-ta">💑 ஏழு வருட காதல், வாழ்நாள் முழுவதும் தொடரும் 💑</span>
+      </div>
+    </div>
+
+    <!-- CARD 2: How We Met -->
+    <div class="card" data-index="1" role="article" aria-label="How We Met Card" tabindex="0">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="card-front-content">
+            <span class="card-emoji">💘</span>
+            <span class="card-front-text">
+              <span class="lang-en">How We Met</span>
+              <span class="lang-ta">நாம் எப்படி சந்தித்தோம்</span>
+            </span>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="card-ornament">✦</div>
+          <h3 class="card-title"><span class="lang-en">Our Love Story...</span><span class="lang-ta">எங்கள் காதல் கதை...</span></h3>
+          <div class="divider"></div>
+          <div class="story-timeline" style="max-height: 480px; overflow-y: auto; padding-right: 10px;">
+            <div class="timeline-item">
+              <span class="timeline-icon">🎓</span>
+              <p style="text-align: left; line-height: 1.6;">
+                <span class="lang-en"><strong>2016 – Where It All Began</strong><br>
+                📍 GCT, Coimbatore<br>
+                Near the chemistry lab, our story quietly began. A simple "hello" turned into something unforgettable.</span>
+                <span class="lang-ta"><strong>2016 – எல்லாம் தொடங்கிய இடம்</strong><br>
+                📍 GCT, கோயம்புத்தூர்<br>
+                வேதியியல் ஆய்வகத்திற்கு அருகில், எங்கள் கதை அமைதியாகத் தொடங்கியது.</span>
+              </p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-icon">😊</span>
+              <p style="text-align: left; line-height: 1.6;">
+                <span class="lang-en"><strong>2017 – From Attendance to Friendship</strong><br>
+                I used to stand up and say attendance - that's when he first noticed me 😄<br>
+                Conversations began, friendship grew stronger.</span>
+                <span class="lang-ta"><strong>2017 – வருகைப் பதிவிலிருந்து நட்பு</strong><br>
+                வருகைப் பதிவு சொல்ல எழுந்தபோது அவர் என்னைக் கவனித்தார்.<br>
+                உரையாடல்கள் தொடங்கி, நட்பு வலுவடைந்தது.</span>
+              </p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-icon">💖</span>
+              <p style="text-align: left; line-height: 1.6;">
+                <span class="lang-en"><strong>2018 – The Yes</strong><br>
+                Sharing thoughts, long walks after college, endless talks...<br>
+                Finally, I said yes to him.</span>
+                <span class="lang-ta"><strong>2018 – ஆம் என்றேன்</strong><br>
+                எண்ணங்களைப் பகிர்ந்தல், கல்லூரிக்குப் பிறகு நீண்ட நடைகள்...<br>
+                இறுதியாக நான் அவரிடம் ஆம் என்றேன்.</span>
+              </p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-icon">💼</span>
+              <p style="text-align: left; line-height: 1.6;">
+                <span class="lang-en"><strong>2019 – Careers & Distance</strong><br>
+                We both started our careers.<br>
+                I worked in Coimbatore, he worked in Chennai.<br>
+                Long-distance love began.</span>
+                <span class="lang-ta"><strong>2019 – தொழில் & தூரம்</strong><br>
+                நாங்கள் இருவரும் எங்கள் தொழிலைத் தொடங்கினோம்.<br>
+                நான் கோவையில், அவர் சென்னைக்கு.<br>
+                தொலைதூர காதல் தொடங்கியது.</span>
+              </p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-icon">🌍</span>
+              <p style="text-align: left; line-height: 1.6;">
+                <span class="lang-en"><strong>2019–2022 – Love Across Miles</strong><br>
+                Three years of distance, countless calls, messages, and little meetups.<br>
+                Love stayed strong, no matter the miles.</span>
+                <span class="lang-ta"><strong>2019–2022 – தொலைவில் காதல்</strong><br>
+                மூன்று வருட தூரம், எண்ணற்ற அழைப்புகள், செய்திகள்.<br>
+                தூரம் எவ்வளவு இருந்தாலும் அன்பு வலிமையாக இருந்தது.</span>
+              </p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-icon">🏡</span>
+              <p style="text-align: left; line-height: 1.6;">
+                <span class="lang-en"><strong>2022 – Getting Job & Moving for Love</strong><br>
+                I got a job and moved to Chennai for him.<br>
+                Distance ended, our journey together truly began.</span>
+                <span class="lang-ta"><strong>2022 – வேலை & அவருக்காக நகர்தல்</strong><br>
+                எனக்கு வேலை கிடைத்தது, அவருக்காக சென்னைக்கு வந்தேன்.<br>
+                தூரம் முடிந்தது, நமது பயணம் உண்மையில் தொடங்கியது.</span>
+              </p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-icon">🙏</span>
+              <p style="text-align: left; line-height: 1.6;">
+                <span class="lang-en"><strong>2024 – Families & Blessings</strong><br>
+                We shared our story with our families.<br>
+                With their blessings, our dream moved closer to reality.</span>
+                <span class="lang-ta"><strong>2024 – குடும்பங்கள் & ஆசீர்வாதங்கள்</strong><br>
+                எங்கள் கதையை குடும்பங்களுடன் பகிர்ந்தோம்.<br>
+                அவர்களின் ஆசீர்வாதத்துடன், கனவு நனவானது.</span>
+              </p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-icon">💍</span>
+              <p style="text-align: left; line-height: 1.6;">
+                <span class="lang-en"><strong>Now – A Forever Together</strong><br>
+                💕 With hearts full of love and families by our side,<br>
+                we are ready to begin our forever - together.</span>
+                <span class="lang-ta"><strong>இப்போது – என்றென்றும் ஒன்றாக</strong><br>
+                💕 அன்பு நிறைந்த இதயங்களுடனும் குடும்பங்களுடனும்,<br>
+                நாங்கள் நித்திய வாழ்க்கையை தொடங்க தயாராக இருக்கிறோம்.</span>
+              </p>
+            </div>
+          </div>
+          <div class="card-ornament bottom">✦</div>
+        </div>
+      </div>
+    </div>
+    <!-- PHOTO GALLERY 2 -->
+    <div class="photo-frame photo-carousel" data-index="1">
+      <div class="photo-wrapper">
+        <div class="carousel-container">
+          <img src="images/photo2.jpg" alt="Our Photo" class="couple-photo carousel-img active">
+          <img src="images/photo2b.jpg" alt="Our Photo" class="couple-photo carousel-img">
+          <img src="images/photo2c.jpg" alt="Our Photo" class="couple-photo carousel-img">
+          <div class="carousel-controls">
+            <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+          </div>
+          <div class="carousel-dots"></div>
+        </div>
+      </div>
+      <div class="photo-caption" style="text-align: center; margin-top: 15px; padding: 10px; color: var(--accent-light); font-style: italic; font-size: 16px;">
+        <span class="lang-en">💞 7 Years of Love, Laughter & Dreams 💞</span>
+        <span class="lang-ta">💞 7 வருட அன்பு, சிரிப்பு மற்றும் கனவுகள் 💞</span>
+      </div>
+    </div>
+    <!-- CARD 3: Fun Facts -->
+    <div class="card" data-index="2" role="article" aria-label="Fun Facts Card" tabindex="0">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="card-front-content">
+            <span class="card-emoji">🎉</span>
+            <span class="card-front-text"><span class="lang-en">Fun Facts</span><span class="lang-ta">சுவாரஸ்ய தகவல்கள்</span></span>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="card-ornament">♥</div>
+          <h3 class="card-title"><span class="lang-en">About The Couple</span><span class="lang-ta">ஜோடி பற்றி</span></h3>
+          <div class="divider"></div>
+          <div class="fun-facts" style="max-height: 480px; overflow-y: auto; padding-right: 10px;">
+            <div class="fact-item" tabindex="0" style="flex-direction: column; align-items: flex-start; padding: 15px;">
+              <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <span class="fact-icon" style="margin-right: 10px;">🍽️</span>
+                <strong style="font-size: 18px;"><span class="lang-en">Veg vs Non-Veg</span><span class="lang-ta">சைவம் vs அசைவம்</span></strong>
+              </div>
+              <p class="fact-text" style="text-align: left; line-height: 1.6; margin: 5px 0 5px 20px;">
+                <span class="lang-en">He's a pure vegetarian 🥗</span>
+                <span class="lang-ta">அவன் முழு சைவ உணவு உண்பவன் 🥗</span>
+              </p>
+              <p class="fact-text" style="text-align: left; line-height: 1.6; margin: 5px 0 0 20px;">
+                <span class="lang-en">She loves non-veg food 🍗</span>
+                <span class="lang-ta">அவள் அசைவ உணவை விரும்புகிறாள் 🍗</span>
+              </p>
+            </div>
+
+            <div class="fact-item" tabindex="0" style="flex-direction: column; align-items: flex-start; padding: 15px;">
+              <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <span class="fact-icon" style="margin-right: 10px;">🧠</span>
+                <strong style="font-size: 18px;"><span class="lang-en">Different ways of thinking</span><span class="lang-ta">வேறுபட்ட சிந்தனை முறைகள்</span></strong>
+              </div>
+              <p class="fact-text" style="text-align: left; line-height: 1.6; margin: 5px 0 5px 20px;">
+                <span class="lang-en">He's a go-with-the-flow person - no reactions,no stress,just smile 🙂</span>
+                <span class="lang-ta">அவன் எதையும் எளிதாக எடுத்துக்கொள்பவன் - எதிர்வினை இல்லை, மன அழுத்தம் இல்லை 🙂</span>
+              </p>
+              <p class="fact-text" style="text-align: left; line-height: 1.6; margin: 5px 0 0 20px;">
+                <span class="lang-en">She's an overthinking champion - expressing every emotion, all at once 😅</span>
+                <span class="lang-ta">அவள் அதிகமாக சிந்திக்கிறாள் - எல்லா உணர்வுகளையும் வெளிப்படுத்துகிறாள் 😅</span>
+              </p>
+            </div>
+
+            <div class="fact-item" tabindex="0" style="flex-direction: column; align-items: flex-start; padding: 15px;">
+              <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <span class="fact-icon" style="margin-right: 10px;">🔊</span>
+                <strong style="font-size: 18px;"><span class="lang-en">Silent vs Expressive</span><span class="lang-ta">அமைதியான vs வெளிப்படையான</span></strong>
+              </div>
+              <p class="fact-text" style="text-align: left; line-height: 1.6; margin: 5px 0 5px 20px;">
+                <span class="lang-en">He's calm and quiet.</span>
+                <span class="lang-ta">அவன் அமைதியானவன்.</span>
+              </p>
+              <p class="fact-text" style="text-align: left; line-height: 1.6; margin: 5px 0 0 20px;">
+                <span class="lang-en">She's expressive and loud.</span>
+                <span class="lang-ta">அவள் வெளிப்படையானவள் மற்றும் சத்தமாக பேசுபவள்.</span>
+              </p>
+            </div>
+
+            <div class="fact-item" tabindex="0" style="flex-direction: column; align-items: flex-start; padding: 15px;">
+              <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <span class="fact-icon" style="margin-right: 10px;">🌍</span>
+                <strong style="font-size: 18px;"><span class="lang-en">Travel vs Comfort</span><span class="lang-ta">பயணம் vs வசதி</span></strong>
+              </div>
+              <p class="fact-text" style="text-align: left; line-height: 1.6; margin: 5px 0 5px 20px;">
+                <span class="lang-en">He loves traveling and trying new foods 🌍</span>
+                <span class="lang-ta">அவன் பயணம் செய்வதையும் புதிய உணவுகளை சுவைப்பதையும் விரும்புகிறான் 🌍</span>
+              </p>
+              <p class="fact-text" style="text-align: left; line-height: 1.6; margin: 5px 0 0 20px;">
+                <span class="lang-en">She loves staying home and enjoying home-cooked food 🏡</span>
+                <span class="lang-ta">அவள் வீட்டில் இருப்பதையும் வீட்டு சமையலை ரசிப்பதையும் விரும்புகிறாள் 🏡</span>
+              </p>
+            </div>
+
+            <div class="fact-item" tabindex="0" style="flex-direction: column; align-items: flex-start; padding: 15px;">
+              <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <span class="fact-icon" style="margin-right: 10px;">☀️</span>
+                <strong style="font-size: 18px;"><span class="lang-en">Morning vs Night Person🌙</span><span class="lang-ta">காலை vs இரவு நபர்</span></strong>
+              </div>
+              <p class="fact-text" style="text-align: left; line-height: 1.6; margin: 5px 0 5px 20px;">
+                <span class="lang-en">He's a morning person - energetic, productive, and ready to conquer the day</span>
+                <span class="lang-ta">அவன் காலை நபர் - சக்தி நிறைந்தவன், உற்பத்தியான நாளை வெல்ல தயாராக</span>
+              </p>
+              <p class="fact-text" style="text-align: left; line-height: 1.6; margin: 5px 0 0 20px;">
+                <span class="lang-en">She's a night owl - most creative and alive when the moon is up</span>
+                <span class="lang-ta">அவள் இரவு நபர் - நிலவு உயரும்போது மிகவும் படைப்பாற்றல் மிக்கவள்</span>
+              </p>
+            </div>
+
+            <div class="fact-item" tabindex="0" style="flex-direction: column; align-items: flex-start; padding: 15px;">
+              <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <span class="fact-icon" style="margin-right: 10px;">💭</span>
+                <strong style="font-size: 18px;"><span class="lang-en">Logic vs Emotion</span><span class="lang-ta">தர்க்கம் vs உணர்வு</span></strong>
+              </div>
+              <p class="fact-text" style="text-align: left; line-height: 1.6; margin: 5px 0 5px 20px;">
+                <span class="lang-en">He handles everything logically</span>
+                <span class="lang-ta">அவன் எல்லாவற்றையும் தர்க்கரீதியாக கையாளுகிறான்</span>
+              </p>
+              <p class="fact-text" style="text-align: left; line-height: 1.6; margin: 5px 0 0 20px;">
+                <span class="lang-en">She handles everything emotionally</span>
+                <span class="lang-ta">அவள் எல்லாவற்றையும் உணர்ச்சிவசப்பட்டு கையாளுகிறாள்</span>
+              </p>
+            </div>
+          </div>
+          <div class="card-ornament bottom">♥</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTO GALLERY 3 -->
+    <div class="photo-frame photo-carousel" data-index="2">
+      <div class="photo-wrapper">
+        <div class="carousel-container">
+          <img src="images/photo3.jpg" alt="Our Photo" class="couple-photo carousel-img active">
+          <img src="images/photo3b.jpg" alt="Our Photo" class="couple-photo carousel-img">
+          <img src="images/photo3c.jpg" alt="Our Photo" class="couple-photo carousel-img">
+          <div class="carousel-controls">
+            <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+          </div>
+          <div class="carousel-dots"></div>
+        </div>
+      </div>
+      <div class="photo-caption" style="text-align: center; margin-top: 15px; padding: 10px; color: var(--accent-light); font-style: italic; font-size: 16px;">
+        <span class="lang-en">💍 From Best Friends to Forever, Finally! 💍</span>
+        <span class="lang-ta">💍 சிறந்த நண்பர்களிலிருந்து நித்திய துணைவர்கள் ஆக 💍</span>
+      </div>
+    </div>
+
+    <!-- CARD 4: Thank You & Contact -->
+    <div class="card" data-index="3" role="article" aria-label="Thank You Card" tabindex="0">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="card-front-content">
+            <span class="card-emoji">✨</span>
+            <span class="card-front-text"><span class="lang-en">Thank You</span><span class="lang-ta">நன்றி</span></span>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="card-ornament">★</div>
+          <h3 class="card-title"><span class="lang-en">With Gratitude</span><span class="lang-ta">நன்றியுடன்</span></h3>
+          <div class="divider"></div>
+          <p class="card-description"><span class="lang-en">Thank you to our families, friends, and everyone who has supported our journey. Your presence makes our special day even more beautiful!</span><span class="lang-ta">எங்கள் குடும்பங்கள், நண்பர்கள் மற்றும் எங்கள் பயணத்தை ஆதரித்த அனைவருக்கும் நன்றி. உங்கள் வருகை எங்கள் சிறப்பு நாளை முழுமையாக்குகிறது!</span></p>
+          <div class="contact-info">
+            <h4><span class="lang-en">Contact Us</span><span class="lang-ta">தொடர்பு கொள்ளவும்</span></h4>
+            <div class="contact-btns">
+              <a href="tel:+919361736072" class="contact-btn">
+                <i class="fas fa-phone"></i> <span><span class="lang-en">Call Deepak</span><span class="lang-ta">தீபக்-க்கு அழைக்கவும்</span></span>
+              </a>
+              <a href="https://wa.me/919361736072" class="contact-btn whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+              </a>
+              <a href="tel:+917871746843" class="contact-btn">
+                <i class="fas fa-phone"></i> <span><span class="lang-en">Call Durga</span><span class="lang-ta">துர்கா-க்கு அழைக்கவும்</span></span>
+              </a>
+              <a href="https://wa.me/917871746843" class="contact-btn whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
+          <div class="card-ornament bottom">★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- QR Code Library -->
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<!-- html2canvas for screenshots -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<script src="js/script.js"></script>
+</body>
+</html>
