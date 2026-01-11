@@ -427,7 +427,7 @@ END:VCALENDAR`;
 // ========== VENUE MAP ==========
 document.getElementById("venueMap").addEventListener("click", () => {
   const venue = "Sri Vasavi Mahal,74, Big St, Pavazhakundur, Tiruvannamalai, Annamalai R.F., Tamil Nadu 606601";
-  window.open(`https://maps.google.com/?q=${encodeURIComponent(venue)}`, '_blank');
+  window.open(`https://maps.google.com/?q=${encodeURIComponent(venue)}`);
 });
 
 // ========== CONFETTI ==========
