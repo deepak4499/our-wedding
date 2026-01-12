@@ -21,7 +21,7 @@ body.dark-mode { --primary-start: #000; --primary-mid1: #1a1a1a; --primary-mid2:
 body {
   min-height: 300vh; font-family: 'Zoho Puvi SemiBold', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', Helvetica, Ubuntu, Roboto, Noto, 'Segoe UI', Arial, sans-serif;
   background: linear-gradient(135deg, var(--primary-start) 0%, var(--primary-mid1) 25%, var(--primary-mid2) 50%, var(--primary-mid3) 75%, var(--primary-end) 100%);
-  background-attachment: fixed; overflow-x: hidden; color: #fff; transition: all 0.5s ease; padding-bottom: 100px;
+  background-attachment: fixed; overflow-x: hidden; color: #fff; transition: all 0.5s ease; padding-bottom: 50px;
 }
 
 /* LOADER */
